@@ -1,4 +1,4 @@
-package org.example;
+package p2;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
