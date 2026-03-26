@@ -1,6 +1,8 @@
 package p2;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +14,9 @@ public class Pedido {
     public Pedido(GeneradorDeFechas dateGenerator, int nroMesa) {
         this.fechaPedido = dateGenerator.fecha();
         this.nroMesa = nroMesa;
+        this.items = new HashMap<>();
+        this.items.put(TipoItem.BEBIDA, new ArrayList<>());
+        this.items.put(TipoItem.PLATO_PRICIPAL, new ArrayList<>());
 
     }
 

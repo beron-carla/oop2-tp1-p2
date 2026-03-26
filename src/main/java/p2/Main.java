@@ -17,11 +17,13 @@ public class Main {
         pedido.agregarItem(TipoItem.BEBIDA, new Item("Cerveza", 50));
         pedido.agregarItem(TipoItem.BEBIDA, new Item("Gaseosa", 50));
 
-
         var dispositivo = new Dispositivo();
         var tarjeta = new Visa();
         Propina propina = Propina.MEDIO;
-        float costoTotal = dispositivo.calcularCostoTotal(pedido, tarjeta, propina);
+        double costoTotal = dispositivo.calcularCostoTotal(pedido, tarjeta, propina);
+
+        System.out.println(pedido.contarItems(TipoItem.BEBIDA));
+        System.out.println(costoTotal);
     }
 
 }
