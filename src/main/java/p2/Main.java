@@ -1,26 +1,22 @@
 package p2;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
 
-        HashMap<String, Double> bebidas = new HashMap<>();
-        bebidas.put("Cerveza", 50.0);
-        bebidas.put("Agua", 50.0);
-
-
-        HashMap<String, Double> platosPrincipales = new HashMap<>();
-        platosPrincipales.put("Pizza", 50.0);
-        platosPrincipales.put("Empanada", 50.0);
-
-        Pedido pedido = new Pedido(bebidas, platosPrincipales, new GeneradorDeFechas() {
+        Pedido pedido = new Pedido(new GeneradorDeFechas() {
             @Override
             public LocalDateTime fecha() {
                 return LocalDateTime.now();
             }
-        });
+        }, 1);
+
+        pedido.agregarItem(TipoItem.PLATO_PRICIPAL, new Item("Pizza", 50));
+        pedido.agregarItem(TipoItem.PLATO_PRICIPAL, new Item("Empanada", 50));
+        pedido.agregarItem(TipoItem.BEBIDA, new Item("Cerveza", 50));
+        pedido.agregarItem(TipoItem.BEBIDA, new Item("Gaseosa", 50));
+
 
         var dispositivo = new Dispositivo();
         var tarjeta = new Visa();

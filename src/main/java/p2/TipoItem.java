@@ -1,6 +1,6 @@
 package p2;
 
-public enum tipoItem {
+public enum TipoItem {
     BEBIDA,
     PLATO_PRICIPAL
 }

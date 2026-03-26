@@ -1,34 +1,41 @@
 package p2;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Pedido {
-    LocalDateTime fechaPedido;
-    HashMap<String, Double> bebidas;
-    HashMap<String, Double> platosPrincipales;
     int nroMesa;
+    private LocalDateTime fechaPedido;
+    private Map<TipoItem, List<Item>> items;
 
-    public Pedido(HashMap<String, Double> bebidas, HashMap<String, Double> platosPrincipales, GeneradorDeFechas dateGenerator) {
+    public Pedido(GeneradorDeFechas dateGenerator, int nroMesa) {
         this.fechaPedido = dateGenerator.fecha();
-        this.bebidas = bebidas;
-        this.platosPrincipales = platosPrincipales;
+        this.nroMesa = nroMesa;
+
     }
 
-    public Double costoBebidas() {
-        Double costoBebidas = 0.0;
-        for (Double precios : bebidas.values()) {
-            costoBebidas += precios;
-        }
-        return costoBebidas;
+    public void agregarItem(TipoItem tipo, Item item) {
+        this.items.get(tipo).add(item);
     }
 
-    public Double costoPlatos() {
-        Double costoPlatos = 0.0;
-        for (Double precios : platosPrincipales.values()) {
-            costoPlatos += precios;
-        }
-        return costoPlatos;
+    public int contarItems(TipoItem tipo) {
+        return items.get(tipo).size();
+    }
+
+    public double totalPorTipo(TipoItem tipo) {
+        return items.get(tipo)
+                .stream()
+                .mapToDouble(Item::precio)
+                .sum();
+    }
+
+    public double totalPedido() {
+        return items.values()
+                .stream()
+                .flatMap(List::stream)
+                .mapToDouble(Item::precio)
+                .sum();
     }
 
     public LocalDateTime fechaPedido() {
