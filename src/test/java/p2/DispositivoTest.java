@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DispositivoTest {
     @Test
-    public void Test01() {  //VISA
+    public void testTarjetaVisa() {  //VISA
         //setup
         var dispositivo = new Dispositivo();
         HashMap<String, Double> bebidas = new HashMap<>();
@@ -28,7 +28,7 @@ public class DispositivoTest {
     }
 
     @Test
-    public void Test02() {  //MASTERCARD
+    public void testTarjetaMastercard() {  //MASTERCARD
         //setup
         var dispositivo = new Dispositivo();
         HashMap<String, Double> bebidas = new HashMap<>();
@@ -46,7 +46,7 @@ public class DispositivoTest {
     }
 
     @Test
-    public void Test03() {  //COMARCA PLUS
+    public void testTarjetaComarcaPlus() {  //COMARCA PLUS
         //setup
         var dispositivo = new Dispositivo();
         HashMap<String, Double> bebidas = new HashMap<>();
@@ -64,7 +64,7 @@ public class DispositivoTest {
     }
 
     @Test
-    public void Test04() {  //SIN DESCUENTO
+    public void testTarjetaSinDescuento() {  //SIN DESCUENTO
         //setup
         var dispositivo = new Dispositivo();
         HashMap<String, Double> bebidas = new HashMap<>();
