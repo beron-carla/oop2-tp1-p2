@@ -1,5 +1,6 @@
 package p2;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -7,25 +8,32 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DispositivoTest {
-    @Test
-    public void testTarjetaVisa() {  //VISA
-        //setup
 
-        Pedido pedido = new Pedido(new GeneradorDeFechas() {
+    public Pedido pedido;
+    public Dispositivo dispositivo;
+
+    @BeforeEach
+    void SetUp() {
+        this.pedido = new Pedido(new GeneradorDeFechas() {
             @Override
             public LocalDateTime fecha() {
                 return LocalDateTime.now();
             }
         }, 1);
 
-        pedido.agregarItem(TipoItem.PLATO_PRICIPAL, new Item("Pizza", 10));
-        pedido.agregarItem(TipoItem.BEBIDA, new Item("Gaseosa", 5));
+        pedido.agregarItem(new PlatoPrincipal("Pizza", 10));
+        pedido.agregarItem(new Bebida("Gaseosa", 5));
+        this.dispositivo = new Dispositivo();
+    }
 
-        var dispositivo = new Dispositivo();
+    @Test
+    public void testTarjetaVisa() {  //VISA
+        //setup
+
         var tarjeta = new Visa();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = dispositivo.calcularCostoTotal(pedido, tarjeta, propina);
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina);
         //verify
         assertEquals(15.2955, costoTotal, 0.1);
 
@@ -34,21 +42,10 @@ public class DispositivoTest {
     @Test
     public void testTarjetaMastercard() {  //MASTERCARD
         //setup
-        Pedido pedido = new Pedido(new GeneradorDeFechas() {
-            @Override
-            public LocalDateTime fecha() {
-                return LocalDateTime.now();
-            }
-        }, 1);
-
-        pedido.agregarItem(TipoItem.PLATO_PRICIPAL, new Item("Pizza", 10));
-        pedido.agregarItem(TipoItem.BEBIDA, new Item("Gaseosa", 5));
-
-        var dispositivo = new Dispositivo();
         var tarjeta = new Mastercard();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = dispositivo.calcularCostoTotal(pedido, tarjeta, propina);
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina);
         //verify
         assertEquals(15.244, costoTotal, 0.1);
 
@@ -57,21 +54,10 @@ public class DispositivoTest {
     @Test
     public void testTarjetaComarcaPlus() {  //COMARCA PLUS
         //setup
-        Pedido pedido = new Pedido(new GeneradorDeFechas() {
-            @Override
-            public LocalDateTime fecha() {
-                return LocalDateTime.now();
-            }
-        }, 1);
-
-        pedido.agregarItem(TipoItem.PLATO_PRICIPAL, new Item("Pizza", 10));
-        pedido.agregarItem(TipoItem.BEBIDA, new Item("Gaseosa", 5));
-
-        var dispositivo = new Dispositivo();
         var tarjeta = new ComarcaPlus();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = dispositivo.calcularCostoTotal(pedido, tarjeta, propina);
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina);
         //verify
         assertEquals(15.141, costoTotal, 0.1);
 
@@ -80,21 +66,11 @@ public class DispositivoTest {
     @Test
     public void testTarjetaSinDescuento() {  //SIN DESCUENTO
         //setup
-        Pedido pedido = new Pedido(new GeneradorDeFechas() {
-            @Override
-            public LocalDateTime fecha() {
-                return LocalDateTime.now();
-            }
-        }, 1);
 
-        pedido.agregarItem(TipoItem.PLATO_PRICIPAL, new Item("Pizza", 10));
-        pedido.agregarItem(TipoItem.BEBIDA, new Item("Gaseosa", 5));
-
-        var dispositivo = new Dispositivo();
         var tarjeta = new TarjetaSinDescuento();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = dispositivo.calcularCostoTotal(pedido, tarjeta, propina);
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina);
         //verify
         assertEquals(15.45, costoTotal, 0.1);
 

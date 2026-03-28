@@ -2,45 +2,38 @@ package p2;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.function.ToDoubleFunction;
 
 public class Pedido {
     int nroMesa;
     private LocalDateTime fechaPedido;
-    private Map<TipoItem, List<Item>> items;
+    private ArrayList<Item> items;
 
     public Pedido(GeneradorDeFechas dateGenerator, int nroMesa) {
         this.fechaPedido = dateGenerator.fecha();
         this.nroMesa = nroMesa;
-        this.items = new HashMap<>();
-        this.items.put(TipoItem.BEBIDA, new ArrayList<>());
-        this.items.put(TipoItem.PLATO_PRICIPAL, new ArrayList<>());
+        this.items = new ArrayList<>();
 
     }
 
-    public void agregarItem(TipoItem tipo, Item item) {
-        this.items.get(tipo).add(item);
+    public void agregarItem(Item item) {
+        this.items.add(item);
     }
 
-    public int contarItems(TipoItem tipo) {
-        return items.get(tipo).size();
+    public double total(ToDoubleFunction<Item> funcion) {
+        double total = 0;
+        for (Item item : items) {
+            total += funcion.applyAsDouble(item);
+        }
+        return total;
     }
 
-    public double totalPorTipo(TipoItem tipo) {
-        return items.get(tipo)
-                .stream()
-                .mapToDouble(Item::precio)
-                .sum();
-    }
-
-    public double totalPedido() {
-        return items.values()
-                .stream()
-                .flatMap(List::stream)
-                .mapToDouble(Item::precio)
-                .sum();
+    public int cantidadItem(ToDoubleFunction<Item> funcion) {
+        int total = 0;
+        for (Item item : items) {
+            total += funcion.applyAsDouble(item);
+        }
+        return total;
     }
 
     public LocalDateTime fechaPedido() {

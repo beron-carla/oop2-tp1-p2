@@ -1,19 +1,13 @@
 package p2;
 
-public class Item {
-    private String nombre;
-    private double precio;
+public interface Item {
 
-    public Item(String nombre, double precio) {
-        this.nombre = nombre;
-        this.precio = precio;
-    }
+    public int sumBebida();
 
-    public String nombre() {
-        return nombre;
-    }
+    public int sumPlato();
 
-    public double precio() {
-        return precio;
-    }
+    public double precioBebida();
+
+    public double precioPlato();
+
 }

@@ -12,17 +12,20 @@ public class Main {
             }
         }, 1);
 
-        pedido.agregarItem(TipoItem.PLATO_PRICIPAL, new Item("Pizza", 50));
-        pedido.agregarItem(TipoItem.PLATO_PRICIPAL, new Item("Empanada", 50));
-        pedido.agregarItem(TipoItem.BEBIDA, new Item("Cerveza", 50));
-        pedido.agregarItem(TipoItem.BEBIDA, new Item("Gaseosa", 50));
+        pedido.agregarItem(new PlatoPrincipal("Pizza", 50));
+        pedido.agregarItem(new PlatoPrincipal("Empanada", 50));
+        pedido.agregarItem(new Bebida("Cerveza", 50));
+        pedido.agregarItem(new Bebida("Gaseosa", 50));
 
         var dispositivo = new Dispositivo();
         var tarjeta = new Visa();
         Propina propina = Propina.MEDIO;
         double costoTotal = dispositivo.calcularCostoTotal(pedido, tarjeta, propina);
 
-        System.out.println(pedido.contarItems(TipoItem.BEBIDA));
+        //cantidad bebidas
+        System.out.println(pedido.cantidadItem(Item -> Item.sumBebida()));
+        //cantidad platos
+        System.out.println(pedido.cantidadItem(Item -> Item.sumPlato()));
         System.out.println(costoTotal);
     }
 
