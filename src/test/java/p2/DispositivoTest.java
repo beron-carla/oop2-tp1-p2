@@ -29,11 +29,10 @@ public class DispositivoTest {
     @Test
     public void testTarjetaVisa() {  //VISA
         //setup
-
         var tarjeta = new Visa();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina);
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, );
         //verify
         assertEquals(15.2955, costoTotal, 0.1);
 
@@ -45,7 +44,7 @@ public class DispositivoTest {
         var tarjeta = new Mastercard();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina);
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, );
         //verify
         assertEquals(15.244, costoTotal, 0.1);
 
@@ -57,7 +56,7 @@ public class DispositivoTest {
         var tarjeta = new ComarcaPlus();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina);
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, );
         //verify
         assertEquals(15.141, costoTotal, 0.1);
 
@@ -66,11 +65,10 @@ public class DispositivoTest {
     @Test
     public void testTarjetaSinDescuento() {  //SIN DESCUENTO
         //setup
-
         var tarjeta = new TarjetaSinDescuento();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina);
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, );
         //verify
         assertEquals(15.45, costoTotal, 0.1);
 

@@ -20,7 +20,8 @@ public class Main {
         var dispositivo = new Dispositivo();
         var tarjeta = new Visa();
         Propina propina = Propina.MEDIO;
-        double costoTotal = dispositivo.calcularCostoTotal(pedido, tarjeta, propina);
+        RegistroDePedidos registroDePedidos = new ArchivoDePedidos("F:\\proyectos\\sistemas\\2026-2028\\archivoDePedidos.txt");
+        double costoTotal = dispositivo.calcularCostoTotal(pedido, tarjeta, propina, registroDePedidos);
 
         //cantidad bebidas
         System.out.println(pedido.cantidadItem(Item -> Item.sumBebida()));
