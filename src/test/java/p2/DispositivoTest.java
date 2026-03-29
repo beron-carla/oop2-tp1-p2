@@ -9,8 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DispositivoTest {
 
-    public Pedido pedido;
-    public Dispositivo dispositivo;
+    private Pedido pedido;
+    private Dispositivo dispositivo;
+    private RegistroDePedidos registro;
 
     @BeforeEach
     void SetUp() {
@@ -24,6 +25,9 @@ public class DispositivoTest {
         pedido.agregarItem(new PlatoPrincipal("Pizza", 10));
         pedido.agregarItem(new Bebida("Gaseosa", 5));
         this.dispositivo = new Dispositivo();
+
+        this.registro = new ArchivoDePedidos("F:\\proyectos\\sistemas\\2026-2028\\archivoDePedidos.txt");
+//        this.registro = new PersistenciaPedidos();
     }
 
     @Test
@@ -32,7 +36,7 @@ public class DispositivoTest {
         var tarjeta = new Visa();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, );
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, registro);
         //verify
         assertEquals(15.2955, costoTotal, 0.1);
 
@@ -44,7 +48,7 @@ public class DispositivoTest {
         var tarjeta = new Mastercard();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, );
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, registro);
         //verify
         assertEquals(15.244, costoTotal, 0.1);
 
@@ -56,7 +60,7 @@ public class DispositivoTest {
         var tarjeta = new ComarcaPlus();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, );
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, registro);
         //verify
         assertEquals(15.141, costoTotal, 0.1);
 
@@ -68,7 +72,7 @@ public class DispositivoTest {
         var tarjeta = new TarjetaSinDescuento();
         Propina propina = Propina.MEDIO;
         //excersice
-        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, );
+        double costoTotal = this.dispositivo.calcularCostoTotal(this.pedido, tarjeta, propina, registro);
         //verify
         assertEquals(15.45, costoTotal, 0.1);
 
